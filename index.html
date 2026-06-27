@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Levenstein Security Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0B1F3A;
+      --navy-mid:   #122843;
+      --blue:       #2D6FA3;
+      --sky:        #5BB8F5;
+      --sky-light:  #E8F4FD;
+      --white:      #F8FAFC;
+      --slate:      #64748B;
+      --slate-light:#94A3B8;
+      --text:       #1E293B;
+      --border:     #CBD5E1;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--text);
+      background: var(--white);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(11, 31, 58, 0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(91, 184, 245, 0.12);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'DM Serif Display', serif;
+      color: #fff;
+      font-size: 1.15rem;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-brand span { color: var(--sky); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--slate-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--sky); }
+
+    .nav-cta {
+      background: var(--sky);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta:hover { background: #7ECBF8 !important; color: var(--navy) !important; }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      background: var(--navy);
+      border-top: 1px solid rgba(91,184,245,0.12);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: var(--slate-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--sky); }
+
+    /* ── HERO ── */
+    #home {
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Signature: risk radar */
+    .radar {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 580px;
+      height: 580px;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    .radar circle {
+      fill: none;
+      stroke: var(--sky);
+      stroke-width: 1.5;
+    }
+
+    .radar line {
+      stroke: var(--sky);
+      stroke-width: 1;
+    }
+
+    .radar-sweep {
+      transform-origin: 290px 290px;
+      animation: sweep 6s linear infinite;
+    }
+
+    @keyframes sweep {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .radar-sweep { animation: none; }
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      color: #fff;
+      line-height: 1.15;
+      max-width: 640px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--sky);
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--slate-light);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--sky);
+      color: var(--navy);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #7ECBF8; transform: translateY(-1px); }
+
+    .btn-ghost {
+      border: 1.5px solid rgba(91,184,245,0.4);
+      color: var(--sky);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--sky); background: rgba(91,184,245,0.08); }
+
+    .hero-trust {
+      margin-top: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(91,184,245,0.1);
+      border: 1px solid rgba(91,184,245,0.2);
+      border-radius: 100px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--sky);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SHARED SECTION ── */
+    section { scroll-margin-top: 64px; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-headline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--slate);
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: #fff; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .about-text p {
+      color: var(--slate);
+      line-height: 1.8;
+      margin-bottom: 1.1rem;
+      font-size: 1.02rem;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-text strong { color: var(--navy); font-weight: 600; }
+
+    .cred-card {
+      background: var(--sky-light);
+      border: 1px solid #BFE0F8;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .cred-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+    }
+
+    .cred-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .cred-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .cred-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--blue);
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--sky-light); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.15s;
+      position: relative;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 8px 32px rgba(11,31,58,0.1);
+      transform: translateY(-2px);
+    }
+
+    .service-card.featured {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 1px var(--blue);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -1px;
+      right: 1.5rem;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .service-tier {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-desc {
+      font-size: 0.92rem;
+      color: var(--slate);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-includes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 1.75rem;
+	  flex: 1;
+    }
+
+    .service-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .check {
+      color: var(--blue);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .service-price {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--slate);
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .service-price strong {
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--navy); }
+
+    #testimonials .section-label { color: var(--sky); }
+    #testimonials .section-headline { color: #fff; }
+    #testimonials .section-sub { color: var(--slate-light); }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .testi-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(91,184,245,0.15);
+      border-radius: 14px;
+      padding: 1.75rem;
+	  display: flex;
+	  flex-direction: column;
+    }
+
+    .testi-stars {
+      color: var(--sky);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .testi-quote {
+      font-size: 0.95rem;
+      color: #CBD5E1;
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 1.25rem;
+    }
+
+    .testi-attr {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--sky);
+	  margin-top: auto;
+    }
+
+    .testi-attr span {
+      display: block;
+      font-weight: 400;
+      color: var(--slate-light);
+      margin-top: 0.2rem;
+    }
+
+    .testi-placeholder {
+      text-align: center;
+      padding: 1rem 0 0;
+    }
+
+    .testi-placeholder p {
+      font-size: 0.85rem;
+      color: var(--slate-light);
+      font-style: italic;
+    }
+
+    /* ── FAQ ── */
+    #faq { background: #fff; }
+
+    .faq-list {
+      margin-top: 3rem;
+      max-width: 740px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-align: left;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover { color: var(--blue); }
+
+    .faq-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      font-size: 1rem;
+      line-height: 1;
+      color: var(--blue);
+    }
+
+    .faq-question[aria-expanded="true"] .faq-icon {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .faq-answer {
+      display: none;
+      padding-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: var(--slate);
+      line-height: 1.75;
+    }
+
+    .faq-answer.open { display: block; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--sky-light); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+      color: var(--slate);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-detail a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contact-detail a:hover { text-decoration: underline; }
+
+    .contact-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .contact-form-wrap {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.25rem;
+    }
+
+    .contact-form-wrap h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.02em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { background: #2460A3; transform: translateY(-1px); }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--slate-light);
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    /* success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .form-success.visible { display: block; }
+    .form-success-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .form-success h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .form-success p {
+      color: var(--slate);
+      font-size: 0.95rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(91,184,245,0.1);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand span { color: var(--sky); }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--slate-light);
+    }
+
+    footer a {
+      color: var(--sky);
+      text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .services-grid,
+      .testi-grid { grid-template-columns: 1fr 1fr; }
+
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .services-grid,
+      .testi-grid { grid-template-columns: 1fr; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-ghost { text-align: center; }
+
+      .radar { width: 320px; height: 320px; right: -60px; opacity: 0.05; }
+    }
+
+    @media (min-width: 641px) {
+      .mobile-menu { display: none !important; }
+    }
+	
+	.service-includes .tier-inherit {
+	color: var(--slate-light);
+	font-style: italic;
+	font-size: 0.84rem;
+	}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#home" class="nav-brand"><span>CyberSecurity Consulting</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact" class="nav-cta">Get a Free Consult</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#testimonials" class="mobile-link">Testimonials</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <a href="#contact" class="mobile-link">Get a Free Consult</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <!-- Signature radar element -->
+    <svg class="radar" viewBox="0 0 580 580" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="290" cy="290" r="60" />
+      <circle cx="290" cy="290" r="120" />
+      <circle cx="290" cy="290" r="180" />
+      <circle cx="290" cy="290" r="240" />
+      <circle cx="290" cy="290" r="280" />
+      <line x1="290" y1="10" x2="290" y2="570" />
+      <line x1="10" y1="290" x2="570" y2="290" />
+      <g class="radar-sweep">
+        <line x1="290" y1="290" x2="290" y2="10" stroke-width="2" stroke-opacity="0.6" />
+        <line x1="290" y1="290" x2="540" y2="155" stroke-width="1" stroke-opacity="0.2" />
+      </g>
+    </svg>
+
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Small Business Cybersecurity · CISSP-Certified</div>
+      <h1 class="hero-headline">
+        Find your vulnerabilities,<br/><em>before someone else does.</em>
+      </h1>
+      <p class="hero-sub">
+        Most small businesses don't know what they're exposed to until it's too late. I help you find the gaps, understand what they mean, and know exactly what to do about them in plain language, without the jargon.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get a Free Consultation</a>
+        <a href="#services" class="btn-ghost">See What's Included</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CISSP Certified
+        </div>
+        <div class="trust-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          No jargon, ever
+        </div>
+        <div class="trust-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Small Business Focused
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">About</div>
+      <h2 class="section-headline">Hi, I'm Eric Levenstein.</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a cybersecurity professional with a CISSP certification and years of hands-on experience helping organizations identify and address their real security risks, not just the theoretical ones.
+          </p>
+          <p>
+            My background is in working with institutions of all sizes, which means I know how enterprise-grade threats show up inside small businesses every day. The tactics attackers use against big companies don't discriminate, and small businesses are often easier targets because they have fewer defenses.
+          </p>
+          <p>
+            <strong>What I've learned</strong> is that most business owners aren't ignoring cybersecurity because they don't care. They're overwhelmed by technical language, unsure where to start, and skeptical of solutions that cost more than they can understand. That's exactly why I do this differently.
+          </p>
+          <p>
+            I've worked with small law firms, therapy practices, and other professional service businesses that handle sensitive client data every day. I'll give you a clear picture of where you stand, written in plain English, with honest recommendations you can actually act on.
+          </p>
+        </div>
+        <div>
+          <div class="cred-card">
+            <h3>Credentials &amp; Experience</h3>
+            <ul class="cred-list">
+              <li>
+                <svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span><strong>CISSP</strong> — Certified Information Systems Security Professional</span>
+              </li>
+              <li>
+                <svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                <span>Experience assessing professional service businesses, including law firms and healthcare practices</span>
+              </li>
+              <li>
+                <svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <span>Deep background in governance, risk &amp; compliance frameworks</span>
+              </li>
+              <li>
+                <svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                <span>Familiar with HIPAA, data privacy, and client confidentiality requirements common to small professional practices</span>
+              </li>
+              <li>
+                <svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                <span>Based in Southern California, serving clients locally and remotely</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-label">Services</div>
+      <h2 class="section-headline">Right-sized for your business.</h2>
+      <p class="section-sub">Three clear options, without hidden upsells. Every engagement starts with a free 30-minute consultation to make sure we're a good fit.</p>
+
+      <div class="services-grid">
+
+        <!-- Essentials -->
+        <div class="service-card">
+          <div class="service-tier">Tier 1</div>
+          <div class="service-name">Essentials</div>
+          <p class="service-desc">A focused assessment of your most common and critical exposure points. Ideal for businesses that want to start somewhere real without overwhelming their budget.</p>
+          <ul class="service-includes">
+            <li><span class="check">✓</span> Network posture review</li>
+            <li><span class="check">✓</span> Password &amp; access control practices</li>
+            <li><span class="check">✓</span> Email security evaluation (phishing exposure)</li>
+            <li><span class="check">✓</span> Basic software &amp; patch hygiene check</li>
+            <li><span class="check">✓</span> Written summary with prioritized findings</li>
+          <!-- Pricing
+		  </ul>
+          <div class="service-price">Starting at <strong>$500 – $800</strong></div>
+		  -->
+        </div>
+
+        <!-- Standard -->
+        <div class="service-card featured">
+          <div class="featured-badge">Most Popular</div>
+          <div class="service-tier">Tier 2</div>
+          <div class="service-name">Standard</div>
+          <p class="service-desc">A thorough assessment for businesses that handle sensitive client information including practices with HIPAA obligations or attorney-client confidentiality requirements.</p>
+          <ul class="service-includes">
+            <li class="tier-inherit"><span class="check">✓</span> Everything in Essentials</li>
+            <li><span class="check">✓</span> Vendor &amp; third-party risk review</li>
+            <li><span class="check">✓</span> Data handling &amp; storage practices</li>
+            <li><span class="check">✓</span> Access controls &amp; user privilege audit</li>
+            <li><span class="check">✓</span> Incident response readiness check</li>
+            <li><span class="check">✓</span> Detailed written report with remediation roadmap</li>
+          <!-- Pricing
+		  </ul>
+          <div class="service-price">Starting at <strong>$1,500 – $2,500</strong></div>
+		  -->
+        </div>
+
+        <!-- Comprehensive -->
+        <div class="service-card">
+          <div class="service-tier">Tier 3</div>
+          <div class="service-name">Comprehensive</div>
+          <p class="service-desc">A full-scope engagement with an executive-ready deliverable. Ideal for firms with compliance obligations or client confidentiality at the core of their business.</p>
+          <ul class="service-includes">
+            <li class="tier-inherit"><span class="check">✓</span> Everything in Standard</li>
+            <li><span class="check">✓</span> HIPAA / data privacy alignment review</li>
+            <li><span class="check">✓</span> Business continuity &amp; backup assessment</li>
+            <li><span class="check">✓</span> Staff security awareness evaluation</li>
+            <li><span class="check">✓</span> Executive summary + full findings report</li>
+            <li><span class="check">✓</span> Prioritized remediation roadmap with effort estimates</li>
+          
+		  <!-- Pricing
+		  </ul>
+          <div class="service-price">Starting at <strong>$3,500 – $5,000+</strong></div>
+		  -->
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-headline">What clients say.</h2>
+      <p class="section-sub">A sample of feedback from businesses I've worked with.</p>
+
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"We had no idea how exposed our client files were. Eric walked us through everything in terms we actually understood, and the report he gave us was something we could hand directly to our IT person and take action on."</p>
+          <div class="testi-attr">
+            Founder
+            <span>New York Legacy Lawyers - Brooklyn, NY</span>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"As a therapist in private practice, I was worried about HIPAA and didn't know where to start. Eric made the whole process comfortable, identified a few things I needed to fix immediately, and helped me understand why they mattered."</p>
+          <div class="testi-attr">
+            Psychotherapist
+            <span>Private Practice - Los Angeles, CA</span>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I expected this to feel like being lectured by an IT person. Instead it felt like getting advice from a trusted colleague. Eric is thorough, clear, and genuinely invested in protecting your business."</p>
+          <div class="testi-attr">
+            Owner
+            <span>Web Services Provider - Westlake Village, CA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-placeholder">
+        <p>More testimonials coming soon. <a href="#contact" style="color: var(--sky);">Please reach out</a> if you'd like to be featured after your assessment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-inner">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-headline">Common questions.</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do I need to be technical to work with you?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">
+            Not at all. I work specifically with business owners who aren't IT experts. My job is to translate what's technically true into what's practically important for your business, in plain English. You'll always understand what I found and what it means before we talk about what to do about it.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Will you actually fix the problems you find?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">
+            My focus is assessment and recommendations. I don't function as a managed IT provider, but I do help you understand which issues are simple enough to handle on your own and which ones warrant bringing in a tech professional. For straightforward fixes, I'll often walk you through them directly. My goal is to leave you with a clear action plan, not a vague list of concerns.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How long does an assessment take?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">
+            The Essentials assessment can typically be completed in a few hours, spread across one or two sessions. Standard assessments usually take two to three sessions over a week or two. Comprehensive engagements involve more depth and may take two to three weeks to complete, depending on the size and complexity of your business.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do you work remotely or in person?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">
+            Both. I'm based in Southern California and can meet in person with clients in the Los Angeles and Ventura County areas. For clients elsewhere, assessments are conducted entirely remotely via video call and secure document sharing, with no reduction in the quality of the work.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Is my business information kept confidential?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">
+            Absolutely. Everything you share with me is treated as strictly confidential. I'm happy to sign a mutual NDA before we begin if that gives you peace of mind. Many clients prefer it, and I think it's a perfectly reasonable practice before inviting anyone to look at your systems.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What kinds of businesses do you typically work with?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">
+            I work primarily with small professional service businesses: law firms, therapy and mental health practices, medical offices, financial advisors, and similar businesses that handle sensitive client information and have real compliance exposure. If you're a small business owner who isn't sure whether your cybersecurity situation is adequate, we're probably a good fit.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What is a CISSP and why does it matter?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">
+            CISSP stands for Certified Information Systems Security Professional. It's widely considered the gold-standard certification in cybersecurity. Earning it requires passing a rigorous exam covering eight security domains, plus years of verified professional experience. It means the person assessing your business has demonstrated deep, broad knowledge of cybersecurity, not just a passing familiarity.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-label">Contact</div>
+      <h2 class="section-headline">Let's talk about your business.</h2>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Start with a free 30-minute consultation.</h3>
+          <p>
+            No pressure, no sales pitch. We'll talk about your business, what you handle, and where your biggest concerns are. From there, I'll recommend whether an assessment makes sense for you, and which one.
+          </p>
+          <p>
+            Most business owners leave that first call with a clearer picture of their situation than they've ever had before. That alone is worth 30 minutes.
+          </p>
+          <div class="contact-detail">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:eric@levenstein.us">eric@levenstein.us</a>
+          </div>
+          <div class="contact-detail">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.6 1.32h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.9z"/></svg>
+            <!-- Replace with your actual phone number -->
+            <a href="tel:+1-646-374-8480">Available upon request</a>
+          </div>
+          <div class="contact-detail">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Response within one business day
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <h3>Send a message</h3>
+          <div id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" placeholder="Jane" />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" placeholder="Smith" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="jane@yourbusiness.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number (optional)</label>
+              <input type="tel" id="phone" placeholder="(555) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label for="biz">Business Type</label>
+              <select id="biz">
+                <option value="">Select one…</option>
+                <option>Law firm</option>
+                <option>Medical / therapy practice</option>
+                <option>Financial services</option>
+                <option>Retail / e-commerce</option>
+                <option>Other professional services</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="tier">Service I'm interested in</label>
+              <select id="tier">
+                <option value="">Not sure yet / let's talk</option>
+                <option>Essentials</option>
+                <option>Standard</option>
+                <option>Comprehensive</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">What's on your mind?</label>
+              <textarea id="message" placeholder="Tell me a bit about your business and your biggest security concerns…"></textarea>
+            </div>
+            <button class="form-submit" id="submit-btn">Send Message →</button>
+            <p class="form-note">Your information is kept strictly confidential and never shared.</p>
+          </div>
+          <div class="form-success" id="form-success">
+            <div class="form-success-icon">✅</div>
+            <h4>Message sent!</h4>
+            <p>Thanks for reaching out. I'll get back to you within one business day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand"><span>CyberSecurity Consulting</span></div>
+    <p>CISSP-Certified Cybersecurity Assessments for Small Business &nbsp;·&nbsp; Southern California &amp; Remote</p>
+    <p style="margin-top: 0.5rem;"><a href="mailto:eric@levenstein.us">eric@levenstein.us</a> &nbsp;·&nbsp; © <span id="year"></span> Eric Levenstein</p>
+  </footer>
+
+  <script>
+    // ── Hamburger menu ──
+    const ham = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        ham.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // ── FAQ accordion ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const answer = btn.nextElementSibling;
+        const icon = btn.querySelector('.faq-icon');
+
+        // Close all
+        document.querySelectorAll('.faq-question').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          b.querySelector('.faq-icon').textContent = '+';
+          b.nextElementSibling.classList.remove('open');
+        });
+
+        // Open this one if it was closed
+        if (!expanded) {
+          btn.setAttribute('aria-expanded', 'true');
+          icon.textContent = '−';
+          answer.classList.add('open');
+        }
+      });
+    });
+
+    // ── Contact form → Google Forms ──
+    // TODO: Replace this URL with your actual Google Form prefill URL.
+    // Steps:
+    //   1. Create a Google Form with fields: First Name, Last Name, Email, Phone, Business Type, Service Tier, Message
+    //   2. Click the 3-dot menu → "Get pre-filled link"
+    //   3. Fill in dummy data, copy the URL, and extract the "entry.XXXXXXX" parameter names
+    //   4. Replace the entry.* values below with your actual field IDs
+    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSeGwPm6pLBlav96x2I-iGOOTM31epsOg6eq1mF0D2MzQlREwQ/formResponse';
+
+    document.getElementById('submit-btn').addEventListener('click', () => {
+      const fname    = document.getElementById('fname').value.trim();
+      const lname    = document.getElementById('lname').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      const phone    = document.getElementById('phone').value.trim();
+      const biz      = document.getElementById('biz').value;
+      const tier     = document.getElementById('tier').value;
+      const message  = document.getElementById('message').value.trim();
+
+      if (!fname || !email) {
+        alert('Please enter at least your first name and email address.');
+        return;
+      }
+
+      // Build hidden form and submit to Google Forms
+      const form = document.createElement('form');
+      form.action = GOOGLE_FORM_ACTION;
+      form.method = 'POST';
+      form.target = 'hidden_iframe';
+      form.style.display = 'none';
+
+      const fields = {
+        'entry.1502073586': fname,
+        'entry.656606807': lname,
+        'entry.1086701179': email,
+        'entry.338189690': phone,
+        'entry.532330286': biz,
+        'entry.638672790': tier,
+        'entry.1969467481': message,
+      };
+
+      Object.entries(fields).forEach(([name, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+
+      // Show success state
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-success').classList.add('visible');
+    });
+	
+	<!-- Current Year -->
+	document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Hidden iframe target for Google Form POST (suppresses redirect) -->
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+</body>
+</html>
