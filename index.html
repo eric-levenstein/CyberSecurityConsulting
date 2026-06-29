@@ -856,7 +856,10 @@
     </svg>
 
     <div class="hero-inner">
-      <div class="hero-eyebrow">· Cybersecurity For Small Businesses<br>· CISSP-Certified</div>
+      <div style="display: flex; flex-direction: column; gap: 0; margin-bottom: 1.5rem;">
+		<div class="hero-eyebrow" style="margin-bottom: 0;">· Cybersecurity For Small Businesses</div>
+		<div class="hero-eyebrow" style="margin-bottom: 0;">· <a href="#faq-cissp" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">CISSP-Certified</a></div>
+	  </div>
       <h1 class="hero-headline">
         Find your vulnerabilities,<br/><em>before someone else does.</em>
       </h1>
@@ -1111,7 +1114,7 @@
           </div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" id="faq-cissp">
           <button class="faq-question" aria-expanded="false">
             What is a CISSP and why does it matter?
             <div class="faq-icon">+</div>
@@ -1320,6 +1323,26 @@
 	
 	<!-- Current Year -->
 	document.getElementById('year').textContent = new Date().getFullYear();
+	
+	<!-- Open CISSP FAQ -->
+	document.querySelector('a[href="#faq-cissp"]').addEventListener('click', function(e) {
+	  e.preventDefault();
+
+	  const item = document.getElementById('faq-cissp');
+	  const btn = item.querySelector('.faq-question');
+	  const answer = item.querySelector('.faq-answer');
+	  const icon = btn.querySelector('.faq-icon');
+
+	  btn.setAttribute('aria-expanded', 'true');
+	  icon.textContent = '−';
+	  answer.classList.add('open');
+
+	  setTimeout(() => {
+		const offset = item.getBoundingClientRect().top + window.scrollY - 80;
+		window.scrollTo({ top: offset, behavior: 'smooth' });
+	  }, 50);
+	});
+
   </script>
 
   <!-- Hidden iframe target for Google Form POST (suppresses redirect) -->
